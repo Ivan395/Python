@@ -21,12 +21,12 @@ def suma(num):
 def run():
     try:
         fact = int(input('Ingresa un número: '))
+        res_suma = suma(fact)
+        res_fact = factorial(fact)
+        print('La suma de 1 hasta {} es {}'.format(fact, res_suma))
+        print('El factorial de {} es {}'.format(fact, res_fact))
     except ValueError:
         print('Ingresa un valor correcto, solo números enteros!')
-    res_suma = suma(fact)
-    res_fact = factorial(fact)
-    print('La suma de 1 hasta {} es {}'.format(fact, res_suma))
-    print('El factorial de {} es {}'.format(fact, res_fact))
 
 
 if __name__ == '__main__':
