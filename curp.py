@@ -1,6 +1,7 @@
 # !/usr/lib64/env python3.6
 # -*- coding: utf-8 -*-
 from colorama import *
+import random
 
 
 # son bisiestos todos los años divisibles por 4, excluyendo los que sean divisibles por 100, pero no los que sean divisibles por 400.
@@ -71,6 +72,15 @@ def bisiesto(anio):
                 return True
     return False
 
+def last_alpha():
+    l = ''
+    lis_num = [x for x in range(10)]
+    lis_letters = [chr(x) for x in range(65, 91)]
+    lis = lis_num + lis_letters
+    for i in range(4):
+        l += random.choice(lis);
+    return l
+
 
 def validate(fecha):
     fecha = fecha.split('/')
@@ -88,9 +98,9 @@ def largo(st):
 
 def dtval(fecha):
     mesese31 = [1, 3, 5, 7, 8, 10, 12]
-    dia = int(fecha[0])
+    anio = int(fecha[0])
     mes = int(fecha[1])
-    anio = int(fecha[-1])
+    dia = int(fecha[-1])
     if mes > 0 and mes < 13:
         if mes in mesese31:
             if dia > 0 and dia < 32:
@@ -143,11 +153,7 @@ def run():
         print('Ejemplo de una fecha valida, 23/03/1963')
         print('Tal cuál como en el ejemplo')
         date = input('Ingresa tu fecha de nacimiento (dd/mm/aaaa): ')
-    sex = input('Hombre o Mujer: ').strip()
-    entidad = input('Ingresa la entidad federativa donde naciste (Coahuila, Jalisco, etc): ').lower().strip()
-    while entidad not in ENTIDADES_FEDERATIVAS:
-        print('Entidad Federativa no encontrada, vuelve a intentarlo')
-        entidad = input('Ingresa la entidad federativa donde naciste (Coahuila, Jalisco, etc): ').lower().strip()
+        
     last_name = last_name.split()[-1]
     second_name = second_name.split()[-1]
     tmp1 = conso(last_name).upper()
@@ -155,8 +161,7 @@ def run():
     tmp3 = conso(name).upper()
     last_name = primer_apellido(last_name)
     date = date.split('/')
-    curp = last_name + second_name[0] + name[0] + date[-1][2:] + date[1] + date[0] + sex[0]
-    curp += ENTIDADES_FEDERATIVAS[entidad] + tmp1 + tmp2 + tmp3 + '09'
+    curp = last_name + second_name[0] + name[0] + date[-1][2:] + date[1] + date[0] + last_alpha()
     print('*' * len(curp))
     print(Fore.RED + curp.upper() + Style.RESET_ALL)
     print('*' * len(curp))
